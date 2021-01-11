@@ -22,7 +22,7 @@ class WebController:
         self.driver.get(self.idleLoc)
 
     def loadMainPage(self):
-        self.driver.get(self.indexloc)
+        self.driver.get(self.indexLoc)
 
     def changeVideo(self, video):
         cmd = "document.getElementById('vidmp4').src='"+video+"'"
