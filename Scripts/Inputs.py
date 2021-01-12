@@ -8,31 +8,96 @@ import adafruit_ads1x15.ads1015 as ADS
 from adafruit_ads1x15.analog_in import AnalogIn
 
 
-
-def measureTemp(limit,webController):
-    webController.measuringTemperature()
+def i2c(webController):
     try:
-        i2c = busio.I2C(board.SCL, board.SDA)# Create the I2C bus
-        ads = ADS.ADS1015(i2c)# Create the ADC object using the I2C bus
-        bus = SMBus(1)#SMBus for Temperature Sensor
-        sharpIR = AnalogIn(ads, ADS.P0)# Create single-ended input on channel 0 - Sharp IR
-        tempSensor = MLX90614(bus, address=0x5A)#Temperature Sensor - I2c
-        while True:
-            if(sharpIR.value>18000):
-                temperature = tempSensor.get_object_1()
-                bus.stop()
-                if(temperature>limit):
-                    webController.highTemperature()
-                    return (temperature,False)
-                    break
-                else:
-                    return (temperature,True)
-                    break
+        bus = busio.I2C(board.SCL, board.SDA)
+        return bus
     except:
-        webController.errorDetected('code:T01')
-        return (-1,-1)
-            
-def detectHand(timeout,webController):
+        webController.errorDetected('code:I01')
+        return - 1
+
+
+def ads(webController):
+    i2c = i2c(webController)
+    if (i2c == -1):
+        return - 1
+    else:
+        try:
+            dev = ADS.ADS1015(i2c)
+            return dev
+        except:
+            webController.errorDetected('code:A01')
+            return - 1
+
+
+def disSensor(webController):
+    ads = ads(webController)
+    if (ads == -1):
+        return - 1
+    else:
+        try:
+            dev = AnalogIn(ads, ADS.P0)
+            return dev
+        except:
+            webController.errorDetected('code:S01')
+            return - 1
+
+
+def pot1(webController):
+    ads = ads(webController)
+    if (ads == -1):
+        return - 1
+    else:
+        try:
+            dev = AnalogIn(ads, ADS.P1)
+            return dev
+        except:
+            webController.errorDetected('code:P01')
+            return - 1
+
+
+def pot2(webController):
+    ads = ads(webController)
+    if (ads == -1):
+        return - 1
+    else:
+        try:
+            dev = AnalogIn(ads, ADS.P2)
+            return dev
+        except:
+            webController.errorDetected('code:P01')
+            return - 1
+
+
+def measureTemp(limit, webController):
+    webController.measuringTemperature()
+    sharpIR = disSensor(webController)
+
+    if (sharpIR == -1):
+        return (-1, -1)
+
+    else:
+        try:
+            bus = SMBus(1)  # SMBus for Temperature Sensor
+            # Temperature Sensor - I2c
+            tempSensor = MLX90614(bus, address=0x5A)
+            while True:
+                if(sharpIR.value > 18000):
+                    temperature = tempSensor.get_object_1()
+                    bus.stop()
+                    if(temperature > limit):
+                        webController.highTemperature()
+                        return (temperature, False)
+                        break
+                    else:
+                        return (temperature, True)
+                        break
+        except:
+            webController.errorDetected('code:T01')
+            return (-1, -1)
+
+
+def detectHand(timeout, webController):
     try:
         sanitizerPIR = DigitalInputDevice(27)
         if(sanitizerPIR.wait_for_active(timeout=timeout)):
@@ -43,22 +108,20 @@ def detectHand(timeout,webController):
         webController.errorDetected('code: P01')
         return -1
 
-def sanitizeTime():
+
+def sanitizeTime(webController):
     try:
-        i2c = busio.I2C(board.SCL, board.SDA)# Create the I2C bus
-        ads = ADS.ADS1015(i2c)# Create the ADC object using the I2C bus
-        sanitizeTimer = AnalogIn(ads, ADS.P1)# Create single-ended input on channel 0 - Pot 01
+        sanitizeTimer = pot1(webController)
         value = sanitizeTimer.value
         timeInSeconds = value
         return timeInSeconds
     except:
         return -1
-    
-def doorTime():
+
+
+def doorTime(webController):
     try:
-        i2c = busio.I2C(board.SCL, board.SDA)# Create the I2C bus
-        ads = ADS.ADS1015(i2c)# Create the ADC object using the I2C bus
-        doorTimer = AnalogIn(ads, ADS.P2)# Create single-ended input on channel 0 - pot 02
+        doorTimer = pot2(webController)
         value = doorTimer.value
         timeInSeconds = value
         return timeInSeconds
