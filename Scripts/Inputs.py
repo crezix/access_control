@@ -18,12 +18,12 @@ def i2c(webController):
 
 
 def ads(webController):
-    i2c = i2c(webController)
-    if (i2c == -1):
+    i2cV = i2c(webController)
+    if (i2cV == -1):
         return - 1
     else:
         try:
-            dev = ADS.ADS1015(i2c)
+            dev = ADS.ADS1015(i2cV)
             return dev
         except:
             webController.errorDetected('code:A01')
@@ -31,12 +31,12 @@ def ads(webController):
 
 
 def disSensor(webController):
-    ads = ads(webController)
-    if (ads == -1):
+    adsV = ads(webController)
+    if (adsV == -1):
         return - 1
     else:
         try:
-            dev = AnalogIn(ads, ADS.P0)
+            dev = AnalogIn(adsV, ADS.P0)
             return dev
         except:
             webController.errorDetected('code:S01')
@@ -44,12 +44,12 @@ def disSensor(webController):
 
 
 def pot1(webController):
-    ads = ads(webController)
-    if (ads == -1):
+    adsV = ads(webController)
+    if (adsV == -1):
         return - 1
     else:
         try:
-            dev = AnalogIn(ads, ADS.P1)
+            dev = AnalogIn(adsV, ADS.P1)
             return dev
         except:
             webController.errorDetected('code:P01')
@@ -57,12 +57,12 @@ def pot1(webController):
 
 
 def pot2(webController):
-    ads = ads(webController)
-    if (ads == -1):
+    adsV = ads(webController)
+    if (adsV == -1):
         return - 1
     else:
         try:
-            dev = AnalogIn(ads, ADS.P2)
+            dev = AnalogIn(adsV, ADS.P2)
             return dev
         except:
             webController.errorDetected('code:P01')
