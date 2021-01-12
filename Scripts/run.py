@@ -2,11 +2,12 @@ from Inputs import measureTemp, detectHand, sanitizeTime, doorTime
 from Outputs import rejectI, successI, captureL, sanitizeL, temperatureL, pump
 from DetectMask import detectMask
 from LoadModels import loadModels
-from osCommands import emergShutdown, emergReboot
+from osCommands import emergShutdown, emergReboot, create
 import WebController
 from time import sleep
 
 webController = WebController.WebController()
+create()
 webController.loadIdlePage()
 net, model = loadModels()
 

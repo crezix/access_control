@@ -26,3 +26,14 @@ def emergReboot(webController):
         webController.get('https://facebook.com')
     except:
         None
+
+
+def create():
+    try:
+        reboot_log = open("reboot.log", 'r')
+        reboot_count = int(reboot_log.read())
+        reboot_log.close()
+    except:
+        reboot_log = open("reboot.log", 'w')
+        reboot_log.write('0')
+        reboot_log.close()
