@@ -111,6 +111,8 @@ def detectHand(timeout, webController):
 def sanitizeTime(webController):
     try:
         sanitizeTimer = pot1(webController)
+        if (sanitizeTimer == -1):
+            return -1
         timeInSeconds = sanitizeTimer
         return timeInSeconds
     except:
@@ -120,6 +122,8 @@ def sanitizeTime(webController):
 def doorTime(webController):
     try:
         doorTimer = pot2(webController)
+        if (doorTimer == -1):
+            return -1
         timeInSeconds = doorTimer
         return timeInSeconds
     except:
