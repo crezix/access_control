@@ -37,7 +37,7 @@ def disSensor(webController):
     else:
         try:
             dev = AnalogIn(adsV, ADS.P0)
-            return dev
+            return dev.value
         except:
             webController.errorDetected('code:S01')
             return - 1
@@ -50,7 +50,7 @@ def pot1(webController):
     else:
         try:
             dev = AnalogIn(adsV, ADS.P1)
-            return dev
+            return dev.value
         except:
             webController.errorDetected('code:P01')
             return - 1
@@ -63,7 +63,7 @@ def pot2(webController):
     else:
         try:
             dev = AnalogIn(adsV, ADS.P2)
-            return dev
+            return dev.value
         except:
             webController.errorDetected('code:P01')
             return - 1
@@ -71,7 +71,6 @@ def pot2(webController):
 
 def measureTemp(limit, webController):
     webController.measuringTemperature()
-    sharpIR = disSensor(webController)
 
     if (sharpIR == -1):
         return (-1, -1)
@@ -82,7 +81,8 @@ def measureTemp(limit, webController):
             # Temperature Sensor - I2c
             tempSensor = MLX90614(bus, address=0x5A)
             while True:
-                if(sharpIR.value > 18000):
+                sharpIR = disSensor(webController)
+                if(sharpIR > 18000):
                     temperature = tempSensor.get_object_1()
                     bus.stop()
                     if(temperature > limit):
@@ -112,8 +112,7 @@ def detectHand(timeout, webController):
 def sanitizeTime(webController):
     try:
         sanitizeTimer = pot1(webController)
-        value = sanitizeTimer.value
-        timeInSeconds = value
+        timeInSeconds = sanitizeTimer
         return timeInSeconds
     except:
         return -1
@@ -122,8 +121,7 @@ def sanitizeTime(webController):
 def doorTime(webController):
     try:
         doorTimer = pot2(webController)
-        value = doorTimer.value
-        timeInSeconds = value
+        timeInSeconds = doorTimer
         return timeInSeconds
     except:
         return -1
