@@ -72,29 +72,28 @@ def pot2(webController):
 def measureTemp(limit, webController):
     webController.measuringTemperature()
 
-    if (sharpIR == -1):
+    try:
+        bus = SMBus(1)  # SMBus for Temperature Sensor
+        # Temperature Sensor - I2c
+        tempSensor = MLX90614(bus, address=0x5A)
+        while True:
+            sharpIR = disSensor(webController)
+            if (sharpIR == -1):
+                return (-1, -1)
+                break
+            elif(sharpIR > 18000):
+                temperature = tempSensor.get_object_1()
+                bus.stop()
+                if(temperature > limit):
+                    webController.highTemperature()
+                    return (temperature, False)
+                    break
+                else:
+                    return (temperature, True)
+                    break
+    except:
+        webController.errorDetected('code:T01')
         return (-1, -1)
-
-    else:
-        try:
-            bus = SMBus(1)  # SMBus for Temperature Sensor
-            # Temperature Sensor - I2c
-            tempSensor = MLX90614(bus, address=0x5A)
-            while True:
-                sharpIR = disSensor(webController)
-                if(sharpIR > 18000):
-                    temperature = tempSensor.get_object_1()
-                    bus.stop()
-                    if(temperature > limit):
-                        webController.highTemperature()
-                        return (temperature, False)
-                        break
-                    else:
-                        return (temperature, True)
-                        break
-        except:
-            webController.errorDetected('code:T01')
-            return (-1, -1)
 
 
 def detectHand(timeout, webController):
