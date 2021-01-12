@@ -15,7 +15,7 @@ def emergShutdown():
         None
 
 
-def emergReboot():
+def emergReboot(webController):
     try:
         reboot_log = open("reboot.log", 'r')
         reboot_count = int(reboot_log.read())
@@ -23,6 +23,6 @@ def emergReboot():
         reboot_log = open("reboot.log", 'w')
         reboot_log.write(str(reboot_count+1))
         reboot_log.close()
-        os.system("sudo reboot")
+        webController.get('https://facebook.com')
     except:
         None

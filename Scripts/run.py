@@ -6,15 +6,16 @@ from osCommands import emergShutdown, emergReboot
 import WebController
 from time import sleep
 
-net, model = loadModels()
 webController = WebController.WebController()
+webController.loadIdlePage()
+net, model = loadModels()
+
 
 while True:
     errorCount = 0
     if (errorCount > 5):
         emergShutdown()
         emergReboot()
-    webController.loadIdlePage()
     temperature, tempStatus = measureTemp(36, webController)
     if (tempStatus == -1):
         errorCount += 1
