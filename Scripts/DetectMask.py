@@ -11,10 +11,10 @@ import os
 import imutils
 import time
 
-imageLoc = '/home/pi/Desktop/Face-Mask-Detection/web/face.jpg'
+imageLoc = '/home/pi/Desktop/access_control/Scripts/web/assets/img/face.jpg'
 
 
-def detectMask(net,model,webController,temperature):
+def detectMask(net, model, webController, temperature):
     webController.preRecognizingMask(round(temperature))
     masked = False
     st = time.time()
@@ -22,14 +22,14 @@ def detectMask(net,model,webController,temperature):
         cam = cv2.VideoCapture(0)
         ret, image = cam.read()
         image = imutils.resize(image, width=300)
-        cv2.imwrite(imageLoc,image)
+        cv2.imwrite(imageLoc, image)
         webController.recognizingMask()
         orig = image.copy()
         (h, w) = image.shape[:2]
 
         # construct a blob from the image
         blob = cv2.dnn.blobFromImage(image, 1.0, (300, 300),
-                                    (104.0, 177.0, 123.0))
+                                     (104.0, 177.0, 123.0))
 
         # pass the blob through the network and obtain the face detections
         print("[INFO] computing face detections...")
@@ -67,14 +67,14 @@ def detectMask(net,model,webController,temperature):
                 # pass the face through the model to determine if the face
                 # has a mask or not
                 (mask, withoutMask) = model.predict(face)[0]
-                if (mask > withoutMask and mask>0.95):
+                if (mask > withoutMask and mask > 0.95):
                     masked = True
-                    #print(True)
-                et =time.time()
+                    # print(True)
+                et = time.time()
                 #print('Processing time :',et-st,'s')
-        
+
         cam.release()
-        #cv2.destroyAllWindows()
+        # cv2.destroyAllWindows()
         webController.maskRecognized()
         webController.preSanitizing()
         if(masked):
@@ -85,4 +85,3 @@ def detectMask(net,model,webController,temperature):
     except:
         webController.errorDetected('code:C01')
         return -1
-

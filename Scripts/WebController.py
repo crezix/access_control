@@ -42,7 +42,7 @@ class WebController:
     def preRecognizingMask(self, temperature):
         self.driver.execute_script(
             "document.getElementById('temp').src='./assets/img/checked.png'")
-        self.changeVideo('./assets/video/face_id.mp4')
+        self.changeVideo('./assets/videos/face_id.mp4')
         self.changeProgress('Hold Still to capture !')
 
     def recognizingMask(self):
@@ -55,11 +55,11 @@ class WebController:
         self.changeProgress('Recognizing Mask!')
 
     def preSanitizing(self):
-        self.changeVideo('./assets/video/sanitize.mp4')
+        self.changeVideo('./assets/videos/sanitize.mp4')
         self.changeProgress('Put your palms to the sanitizer!')
 
     def sanitizing(self):
-        self.changeVideo('./assets/video/sanitize.mp4')
+        self.changeVideo('./assets/videos/sanitize.mp4')
         self.changeProgress('Sanitizing...!')
 
     def noMask(self):
@@ -67,7 +67,7 @@ class WebController:
         self.driver.execute_script(cmd)
         cmd = "document.getElementById('face').style.display='none'"
         self.driver.execute_script(cmd)
-        self.changeVideo('./assets/video/mask_not_detected.mp4')
+        self.changeVideo('./assets/videos/mask_not_detected.mp4')
         self.changeProgress('Mask is not detected!')
         self.driver.execute_script(
             "document.getElementById('mask').src='./assets/img/close.png'")
