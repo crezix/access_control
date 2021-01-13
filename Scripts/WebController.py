@@ -17,7 +17,7 @@ class WebController:
 
         self.idleLoc = "file:///home/pi/Desktop/Face-Mask-Detection/web/idle.html"
         self.indexLoc = "file:///home/pi/Desktop/Face-Mask-Detection/web/index.html"
-        self.errLoc = "file:///home/pi/Desktop/Face-Mask-Detection/web/err.html"
+        self.errLoc = "file:///home/pi/Desktop/access_control/Scripts/web/err.html"
 
     def loadIdlePage(self):
         self.driver.get(self.idleLoc)
