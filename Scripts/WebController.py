@@ -15,8 +15,8 @@ class WebController:
             "excludeSwitches", ["enable-automation"])
         self.driver = webdriver.Chrome(options=self.chrome_options)
 
-        self.idleLoc = "file:///home/pi/Desktop/Face-Mask-Detection/web/idle.html"
-        self.indexLoc = "file:///home/pi/Desktop/Face-Mask-Detection/web/index.html"
+        self.idleLoc = "file:///home/pi/Desktop/access_control/Scripts/web/idle.html"
+        self.indexLoc = "file:///home/pi/Desktop/access_control/Scripts/web/index.html"
         self.errLoc = "file:///home/pi/Desktop/access_control/Scripts/web/err.html"
 
     def loadIdlePage(self):

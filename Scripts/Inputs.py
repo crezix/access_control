@@ -83,7 +83,7 @@ def measureTemp(limit, webController):
                 break
             elif(sharpIR > 18000):
                 temperature = tempSensor.get_object_1()
-                bus.stop()
+                # bus.stop()
                 if(temperature > limit):
                     webController.highTemperature()
                     return (temperature, False)
