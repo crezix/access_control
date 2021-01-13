@@ -91,7 +91,7 @@ class WebController:
             "document.getElementById('temp').src='assets/img/close.png'")
 
     def errorPage(self):
-        self.driver.get(errLoc)
+        self.driver.get(self.errLoc)
 
     def errorDetected(self, error):
         self.errorPage()
