@@ -15,7 +15,7 @@ net, model = loadModels()
 while True:
     errorCount = 0
     if (errorCount > 3):
-        pass
+        break
     temperature, tempStatus = measureTemp(36, webController)
     if (tempStatus == -1):
         errorCount += 1
