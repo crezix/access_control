@@ -41,8 +41,8 @@ class WebController:
 
     def preRecognizingMask(self, temperature):
         self.driver.execute_script(
-            "document.getElementById('temp').src='assets/img/checked.png'")
-        self.changeVideo('assets/video/face_id.mp4')
+            "document.getElementById('temp').src='./assets/img/checked.png'")
+        self.changeVideo('./assets/video/face_id.mp4')
         self.changeProgress('Hold Still to capture !')
 
     def recognizingMask(self):
@@ -55,11 +55,11 @@ class WebController:
         self.changeProgress('Recognizing Mask!')
 
     def preSanitizing(self):
-        self.changeVideo('assets/video/sanitize.mp4')
+        self.changeVideo('./assets/video/sanitize.mp4')
         self.changeProgress('Put your palms to the sanitizer!')
 
     def sanitizing(self):
-        self.changeVideo('assets/video/sanitize.mp4')
+        self.changeVideo('./assets/video/sanitize.mp4')
         self.changeProgress('Sanitizing...!')
 
     def noMask(self):
@@ -67,10 +67,10 @@ class WebController:
         self.driver.execute_script(cmd)
         cmd = "document.getElementById('face').style.display='none'"
         self.driver.execute_script(cmd)
-        self.changeVideo('assets/video/mask_not_detected.mp4')
+        self.changeVideo('./assets/video/mask_not_detected.mp4')
         self.changeProgress('Mask is not detected!')
         self.driver.execute_script(
-            "document.getElementById('mask').src='assets/img/close.png'")
+            "document.getElementById('mask').src='./assets/img/close.png'")
 
     def maskRecognized(self):
         cmd = "document.getElementsByTagName('video')[0].style.display='block'"
@@ -78,17 +78,17 @@ class WebController:
         cmd = "document.getElementById('face').style.display='none'"
         self.driver.execute_script(cmd)
         self.driver.execute_script(
-            "document.getElementById('mask').src='assets/img/checked.png'")
+            "document.getElementById('mask').src='./assets/img/checked.png'")
 
     def sanitized(self):
         self.driver.execute_script(
-            "document.getElementById('sanitize').src='assets/img/checked.png'")
+            "document.getElementById('sanitize').src='./assets/img/checked.png'")
         self.changeProgress('You can go in!')
 
     def highTemperature(self):
         self.changeProgress('Temperature is over the limit!')
         self.driver.execute_script(
-            "document.getElementById('temp').src='assets/img/close.png'")
+            "document.getElementById('temp').src='./assets/img/close.png'")
 
     def errorPage(self):
         self.driver.get(self.errLoc)
