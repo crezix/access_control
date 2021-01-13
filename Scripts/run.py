@@ -6,6 +6,8 @@ from osCommands import emergShutdown, emergReboot, create
 import WebController
 from time import sleep
 
+errorCount = 0
+
 webController = WebController.WebController()
 create()
 webController.loadIdlePage()
@@ -13,7 +15,6 @@ net, model = loadModels()
 
 
 while True:
-    errorCount = 0
     if (errorCount > 3):
         break
     temperature, tempStatus = measureTemp(36, webController)
