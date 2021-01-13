@@ -17,6 +17,7 @@ class WebController:
 
         self.idleLoc = "file:///home/pi/Desktop/Face-Mask-Detection/web/idle.html"
         self.indexLoc = "file:///home/pi/Desktop/Face-Mask-Detection/web/index.html"
+        self.errLoc = "file:///home/pi/Desktop/Face-Mask-Detection/web/err.html"
 
     def loadIdlePage(self):
         self.driver.get(self.idleLoc)
@@ -89,11 +90,13 @@ class WebController:
         self.driver.execute_script(
             "document.getElementById('temp').src='assets/img/close.png'")
 
-    def errorDetected(self, error):
-        self.changeProgress('Err! - ' + error)
-
     def errorPage(self):
-        self.driver.get('')
+        self.driver.get(errLoc)
+
+    def errorDetected(self, error):
+        self.errorPage()
+        cmd = "document.getElementById('err').innerText='"+error+"'"
+        self.driver.execute_script(cmd)
 
     def refresh(self):
         self.driver.refresh()
