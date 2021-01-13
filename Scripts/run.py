@@ -14,9 +14,8 @@ net, model = loadModels()
 
 while True:
     errorCount = 0
-    if (errorCount > 5):
-        emergShutdown()
-        emergReboot()
+    if (errorCount > 3):
+        pass
     temperature, tempStatus = measureTemp(36, webController)
     if (tempStatus == -1):
         errorCount += 1

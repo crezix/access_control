@@ -92,5 +92,8 @@ class WebController:
     def errorDetected(self, error):
         self.changeProgress('Err! - ' + error)
 
+    def errorPage(self):
+        self.driver.get('')
+
     def refresh(self):
         self.driver.refresh()
