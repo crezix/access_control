@@ -50,7 +50,7 @@ class WebController:
         self.driver.execute_script(cmd)
         cmd = "document.getElementById('face').style.display='block'"
         self.driver.execute_script(cmd)
-        cmd = "document.getElementById('face').src ='./face.jpg'"
+        cmd = "document.getElementById('face').src ='./assets/img/face.jpg'"
         self.driver.execute_script(cmd)
         self.changeProgress('Recognizing Mask!')
 
