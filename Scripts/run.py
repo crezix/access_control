@@ -43,9 +43,7 @@ while True:
                 sleep(5)
                 continue
             elif (handDetected):
-                sanitizeL(True)
                 pump(sanitizingDuration, webController)
-                sanitizeL(False)
                 successI(doorDuration, webController)
             continue
         else:
