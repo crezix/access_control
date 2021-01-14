@@ -10,6 +10,7 @@ import cv2
 import os
 import imutils
 import time
+from Outputs import captureL
 
 imageLoc = '/home/pi/Desktop/access_control/Scripts/web/assets/img/face.jpg'
 
@@ -19,8 +20,10 @@ def detectMask(net, model, webController, temperature):
     masked = False
     st = time.time()
     try:
+        captureL(True)
         cam = cv2.VideoCapture(0)
         ret, image = cam.read()
+        captureL(False)
         image = imutils.resize(image, width=300)
         cv2.imwrite(imageLoc, image)
         webController.recognizingMask()

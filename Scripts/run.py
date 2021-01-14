@@ -17,12 +17,14 @@ while True:
     webController.loadIdlePage()
     if (errorCount > 3):
         break
+    temperatureL(2)
     temperature, tempStatus = measureTemp(36, webController)
+    temperatureL(3)
     if (tempStatus == -1):
         errorCount += 1
         sleep(5)
         continue
-    elif(tempStatus):
+    elif (tempStatus):
         maskStatus = detectMask(net, model, webController, temperature)
         if (maskStatus == -1):
             errorCount += 1

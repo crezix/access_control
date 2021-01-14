@@ -98,7 +98,7 @@ def measureTemp(limit, webController):
 
 def detectHand(timeout, webController):
     try:
-        sanitizerPIR = DigitalInputDevice(27)
+        sanitizerPIR = DigitalInputDevice(8)
         if(sanitizerPIR.wait_for_active(timeout=timeout)):
             return True
         else:
