@@ -1,5 +1,5 @@
 from Inputs import measureTemp, detectHand, sanitizeTime, doorTime
-from Outputs import rejectI, successI, captureL, sanitizeL, temperatureL, pump
+from Outputs import rejectI, successI, captureL, sanitizeL, temperatureL, pump, pumpOff
 from DetectMask import detectMask
 from LoadModels import loadModels
 from osCommands import emergShutdown, emergReboot, create
@@ -10,6 +10,7 @@ errorCount = 0
 rejectI(False)
 successI(False)
 captureL(False)
+pumpOff()
 
 webController = WebController.WebController()
 webController.loadIdlePage()
