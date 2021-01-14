@@ -31,10 +31,10 @@ while True:
             sleep(5)
             continue
         elif(maskStatus):
-            #sanitizingDuration = sanitizeTime()
-            #sleepingDuration = doorTime()
-            sanitizingDuration = 5
-            sleepingDuration = 5
+            sanitizingDuration = sanitizeTime()
+            sleepingDuration = doorTime()
+            #sanitizingDuration = 5
+            #sleepingDuration = 5
             handDetected = detectHand(5, webController)
             if (handDetected == -1):
                 errorCount += 1
