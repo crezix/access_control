@@ -10,7 +10,6 @@ errorCount = 0
 rejectI(False)
 successI(False)
 captureL(False)
-pump(False)
 
 webController = WebController.WebController()
 webController.loadIdlePage()
