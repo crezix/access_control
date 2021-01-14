@@ -47,8 +47,12 @@ while True:
                 successI(doorDuration, webController)
             continue
         else:
+            rejectI(True)
             sleep(2)
+            rejectI(False)
             continue
     else:
+        rejectI(True)
         sleep(2)
+        rejectI(False)
         continue
