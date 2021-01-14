@@ -6,6 +6,7 @@ import board
 import busio
 import adafruit_ads1x15.ads1015 as ADS
 from adafruit_ads1x15.analog_in import AnalogIn
+from numpy import interp
 
 
 def i2c(webController):
@@ -113,8 +114,8 @@ def sanitizeTime(webController):
         sanitizeTimer = pot1(webController)
         if (sanitizeTimer == -1):
             return -1
-        timeInSeconds = sanitizeTimer
-        return timeInSeconds
+        timeInSeconds = interp(sanitizeTimer, [0, 26368], [0, 5])
+        return round(timeInSeconds, 1)
     except:
         return -1
 
@@ -124,7 +125,7 @@ def doorTime(webController):
         doorTimer = pot2(webController)
         if (doorTimer == -1):
             return -1
-        timeInSeconds = doorTimer
-        return timeInSeconds
+        timeInSeconds = interp(doorTimer, [0, 26368], [0, 10])
+        return round(timeInSeconds, 1)
     except:
         return -1
