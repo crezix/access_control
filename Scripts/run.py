@@ -35,7 +35,9 @@ while True:
             sleepingDuration = doorTime(webController)
             #sanitizingDuration = 5
             #sleepingDuration = 5
+            sanitizeL(True)
             handDetected = detectHand(5, webController)
+            sanitizeL(False)
             if (handDetected == -1):
                 errorCount += 1
                 sleep(5)

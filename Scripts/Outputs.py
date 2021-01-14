@@ -34,7 +34,7 @@ def captureL(state):
 
 def sanitizeL(state):
     if(state):
-        sanitizerLight.on()
+        sanitizerLight.blink(on_time=0.5, off_time=0.5)
     else:
         sanitizerLight.off()
 
