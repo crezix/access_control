@@ -20,8 +20,8 @@ def detectMask(net, model, webController, temperature):
     masked = False
     st = time.time()
     try:
-        captureL(True)
         cam = cv2.VideoCapture(0)
+        captureL(True)
         ret, image = cam.read()
         captureL(False)
         image = imutils.resize(image, width=300)
