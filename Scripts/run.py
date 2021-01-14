@@ -14,7 +14,7 @@ net, model = loadModels()
 
 
 while True:
-    if (errorCount > 3):
+    if (errorCount > 2):
         break
     else:
         webController.loadIdlePage()
