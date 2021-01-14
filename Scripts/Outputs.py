@@ -18,13 +18,6 @@ def rejectI(state):
         rejectIndicator.on()
 
 
-def successI(state):
-    if(state):
-        successIndicator.off()
-    else:
-        successIndicator.on()
-
-
 def captureL(state):
     if(state):
         captureLight.off()
@@ -48,10 +41,17 @@ def temperatureL(state):
         temperatureLight.off()
 
 
-def pump(pumpingTime, sleepingTime, webController):
+def pump(pumpingTime, webController):
     webController.sanitizing()
     pumpRelay.off()
     sleep(pumpingTime)
     pumpRelay.on()
     webController.sanitized()
-    sleep(sleepingTime)
+
+
+def successI(doorTime, webController):
+    # webController.sanitizing()
+    successIndicator.off()
+    sleep(doorTime)
+    successIndicator.on()
+    # webController.sanitized()

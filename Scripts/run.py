@@ -32,7 +32,7 @@ while True:
             continue
         elif(maskStatus):
             sanitizingDuration = sanitizeTime(webController)
-            sleepingDuration = doorTime(webController)
+            doorDuration = doorTime(webController)
             #sanitizingDuration = 5
             #sleepingDuration = 5
             sanitizeL(True)
@@ -43,7 +43,8 @@ while True:
                 sleep(5)
                 continue
             elif(handDetected):
-                pump(sanitizingDuration, sleepingDuration, webController)
+                pump(sanitizingDuration, webController)
+                successI(doorDuration, webController)
             continue
         else:
             sleep(2)
