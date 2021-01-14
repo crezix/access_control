@@ -9,6 +9,7 @@ captureLight = DigitalOutputDevice(27)
 sanitizerLight = DigitalOutputDevice(18)
 temperatureLight = DigitalOutputDevice(23)
 pumpRelay = DigitalOutputDevice(24)
+pumpRelay.on()
 
 
 def rejectI(state):
