@@ -70,7 +70,7 @@ def detectMask(net, model, webController, temperature):
                 # pass the face through the model to determine if the face
                 # has a mask or not
                 (mask, withoutMask) = model.predict(face)[0]
-                if (mask > withoutMask and mask > 0.95):
+                if (mask > withoutMask and mask > 0.98):
                     masked = True
                     # print(True)
                 et = time.time()
