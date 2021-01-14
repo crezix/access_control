@@ -13,23 +13,23 @@ pumpRelay = DigitalOutputDevice(24)
 
 def rejectI(state):
     if(state):
-        rejectIndicator.off()
-    else:
         rejectIndicator.on()
+    else:
+        rejectIndicator.off()
 
 
 def successI(state):
     if(state):
-        successIndicator.off()
-    else:
         successIndicator.on()
+    else:
+        successIndicator.off()
 
 
 def captureL(state):
     if(state):
-        captureLight.off()
-    else:
         captureLight.on()
+    else:
+        captureLight.off()
 
 
 def sanitizeL(state):
@@ -50,8 +50,8 @@ def temperatureL(state):
 
 def pump(pumpingTime, sleepingTime, webController):
     webController.sanitizing()
-    pumpRelay.off()
-    sleep(pumpingTime)
     pumpRelay.on()
+    sleep(pumpingTime)
+    pumpRelay.off()
     webController.sanitized()
     sleep(sleepingTime)
