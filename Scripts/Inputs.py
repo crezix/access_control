@@ -71,7 +71,6 @@ def pot2(webController):
 
 
 def measureTemp(limit, webController):
-    webController.measuringTemperature()
 
     try:
         bus = SMBus(1)  # SMBus for Temperature Sensor
@@ -82,7 +81,8 @@ def measureTemp(limit, webController):
             if (sharpIR == -1):
                 return (-1, -1)
                 break
-            elif(sharpIR > 18000):
+            elif (sharpIR > 18000):
+                webController.measuringTemperature()
                 temperature = tempSensor.get_object_1()
                 # bus.stop()
                 if(temperature > limit):

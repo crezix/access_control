@@ -14,9 +14,10 @@ net, model = loadModels()
 
 
 while True:
-    webController.loadIdlePage()
     if (errorCount > 3):
         break
+    else:
+        webController.loadIdlePage()
     temperatureL(2)
     temperature, tempStatus = measureTemp(36, webController)
     temperatureL(3)
