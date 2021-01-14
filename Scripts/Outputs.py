@@ -3,12 +3,12 @@ from time import sleep
 
 
 # outputs
-rejectIndicator = DigitalOutputDevice(17)
-successIndicator = DigitalOutputDevice(22)
-captureLight = DigitalOutputDevice(27)
+rejectIndicator = DigitalOutputDevice(17, initial_value=True)
+successIndicator = DigitalOutputDevice(22, initial_value=True)
+captureLight = DigitalOutputDevice(27, initial_value=True)
 sanitizerLight = DigitalOutputDevice(18)
 temperatureLight = DigitalOutputDevice(23)
-pumpRelay = DigitalOutputDevice(24)
+pumpRelay = DigitalOutputDevice(24, initial_value=True)
 
 
 def rejectI(state):
@@ -55,7 +55,3 @@ def pump(pumpingTime, sleepingTime, webController):
     pumpRelay.on()
     webController.sanitized()
     sleep(sleepingTime)
-
-
-def pumpOff():
-    pumpRelay.on()
