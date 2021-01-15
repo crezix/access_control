@@ -101,9 +101,9 @@ def detectHand(timeout, webController):
     try:
         sanitizerPIR = DigitalInputDevice(8)
         value = sanitizerPIR.value
-        if (value == 1):
+        if (value == 0):
             return True
-        elif(sanitizerPIR.wait_for_active(timeout=timeout)):
+        elif(sanitizerPIR.wait_for_inactive(timeout=timeout)):
             return True
         else:
             return False
