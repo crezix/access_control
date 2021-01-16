@@ -114,7 +114,7 @@ def sanitizeTime(webController):
         sanitizeTimer = pot1(webController)
         if (sanitizeTimer == -1):
             return -1
-        timeInSeconds = interp(sanitizeTimer, [0, 3.3], [0, 5])
+        timeInSeconds = sanitizeTimer*5/3.3
         return round(timeInSeconds, 1)
     except:
         # webController.errorDetected('code:P01')
@@ -126,7 +126,7 @@ def doorTime(webController):
         doorTimer = pot2(webController)
         if (doorTimer == -1):
             return -1
-        timeInSeconds = interp(doorTimer, [0, 3.3], [0, 10])
+        timeInSeconds = (doorTimer/3.3)*10
         return round(timeInSeconds, 1)
     except:
         # webController.errorDetected('code:P02')
