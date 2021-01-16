@@ -15,12 +15,12 @@ webController.loadIdlePage()
 net, model = loadModels()
 
 faulthandler.enable()
-sanitizingDuration = sanitizeTime(webController)
+'''sanitizingDuration = sanitizeTime(webController)
 doorDuration = doorTime(webController)
 if (sanitizingDuration == -1):
     sanitizingDuration = 2.5
 if (doorDuration == -1):
-    doorDuration = 5
+    doorDuration = 5'''
 
 while True:
     if (errorCount > 2):
@@ -41,8 +41,8 @@ while True:
             webController.loadIdlePage()
             continue
         elif(maskStatus):
-            # sanitizingDuration = 5
-            # sleepingDuration = 5
+            sanitizingDuration = 5
+            doorDuration = 5
             sanitizeL(True)
             handDetected = detectHand(5, webController)
             sanitizeL(False)
@@ -59,9 +59,11 @@ while True:
             rejectI(True)
             sleep(2)
             rejectI(False)
+            webController.loadIdlePage()
             continue
     else:
         rejectI(True)
         sleep(2)
         rejectI(False)
+        webController.loadIdlePage()
         continue
