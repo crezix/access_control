@@ -21,8 +21,6 @@ while True:
     temperatureL(2)
     temperature, tempStatus = measureTemp(36, webController)
     temperatureL(3)
-    sanitizingDuration = sanitizeTime(webController)
-    doorDuration = doorTime(webController)
     if (tempStatus == -1):
         errorCount += 1
         sleep(5)
@@ -34,8 +32,8 @@ while True:
             sleep(5)
             continue
         elif(maskStatus):
-            #sanitizingDuration = 5
-            #sleepingDuration = 5
+            # sanitizingDuration = 5
+            # sleepingDuration = 5
             sanitizeL(True)
             handDetected = detectHand(5, webController)
             sanitizeL(False)
@@ -44,6 +42,8 @@ while True:
                 sleep(5)
                 continue
             elif (handDetected):
+                sanitizingDuration = sanitizeTime(webController)
+                doorDuration = doorTime(webController)
                 pump(sanitizingDuration, webController)
                 successI(doorDuration, webController)
             continue
