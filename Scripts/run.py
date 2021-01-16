@@ -14,6 +14,8 @@ net, model = loadModels()
 
 
 while True:
+    sanitizingDuration = sanitizeTime(webController)
+    doorDuration = doorTime(webController)
     if (errorCount > 2):
         break
     else:
@@ -32,8 +34,6 @@ while True:
             sleep(5)
             continue
         elif(maskStatus):
-            sanitizingDuration = sanitizeTime(webController)
-            doorDuration = doorTime(webController)
             #sanitizingDuration = 5
             #sleepingDuration = 5
             sanitizeL(True)
