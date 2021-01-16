@@ -6,6 +6,7 @@ from osCommands import emergShutdown, emergReboot, create
 import WebController
 from time import sleep
 import faulthandler
+import Thread
 
 errorCount = 0
 
@@ -46,14 +47,16 @@ while True:
                 webController.loadIdlePage()
                 continue
             elif (handDetected):
-                sanitizingDuration = sanitizeTime(webController)
+                '''sanitizingDuration = sanitizeTime(webController)
                 doorDuration = doorTime(webController)
                 if (sanitizingDuration == -1):
                     sanitizingDuration = 2.5
                 if (doorDuration == -1):
                     doorDuration = 5
                 pump(sanitizingDuration, webController)
-                successI(doorDuration, webController)
+                successI(doorDuration, webController)'''
+                Thread.start_new_thread(sanitizeTime(webController))
+                # Thread.start_new_thread(doorTime(webController))
             webController.loadIdlePage()
             continue
         else:
