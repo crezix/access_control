@@ -5,6 +5,7 @@ from LoadModels import loadModels
 from osCommands import emergShutdown, emergReboot, create
 import WebController
 from time import sleep
+import faulthandler
 
 errorCount = 0
 
@@ -12,6 +13,7 @@ webController = WebController.WebController()
 webController.loadIdlePage()
 net, model = loadModels()
 
+faulthandler.enable()
 
 while True:
     try:
