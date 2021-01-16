@@ -15,30 +15,24 @@ net, model = loadModels()
 
 faulthandler.enable()
 
-sanitizingDuration = sanitizeTime(webController)
-doorDuration = doorTime(webController)
-if (sanitizingDuration == -1):
-    sanitizingDuration = 2.5
-if (doorDuration == -1):
-    doorDuration = 5
 
 while True:
     if (errorCount > 2):
         break
-    else:
-        webController.loadIdlePage()
     temperatureL(2)
     temperature, tempStatus = measureTemp(36, webController)
     temperatureL(3)
     if (tempStatus == -1):
         errorCount += 1
         sleep(5)
+        webController.loadIdlePage()
         continue
     elif (tempStatus):
         maskStatus = detectMask(net, model, webController, temperature)
         if (maskStatus == -1):
             errorCount += 1
             sleep(5)
+            webController.loadIdlePage()
             continue
         elif(maskStatus):
             # sanitizingDuration = 5
@@ -49,18 +43,28 @@ while True:
             if (handDetected == -1):
                 errorCount += 1
                 sleep(5)
+                webController.loadIdlePage()
                 continue
             elif (handDetected):
+                sanitizingDuration = sanitizeTime(webController)
+                doorDuration = doorTime(webController)
+                if (sanitizingDuration == -1):
+                    sanitizingDuration = 2.5
+                if (doorDuration == -1):
+                    doorDuration = 5
                 pump(sanitizingDuration, webController)
                 successI(doorDuration, webController)
+            webController.loadIdlePage()
             continue
         else:
             rejectI(True)
             sleep(2)
             rejectI(False)
+            webController.loadIdlePage()
             continue
     else:
         rejectI(True)
         sleep(2)
         rejectI(False)
+        webController.loadIdlePage()
         continue
