@@ -20,6 +20,10 @@ while True:
         webController.loadIdlePage()
     sanitizingDuration = sanitizeTime(webController)
     doorDuration = doorTime(webController)
+    if (sanitizingDuration == -1):
+        sanitizingDuration = 2.5
+    if (doorDuration == -1):
+        doorDuration = 5
     temperatureL(2)
     temperature, tempStatus = measureTemp(36, webController)
     temperatureL(3)
