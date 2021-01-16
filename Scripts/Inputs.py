@@ -7,7 +7,6 @@ import busio
 import adafruit_ads1x15.ads1015 as ADS
 from adafruit_ads1x15.analog_in import AnalogIn
 from numpy import interp
-from Outputs import pump, successI
 
 
 def i2c(webController):
@@ -110,26 +109,25 @@ def detectHand(timeout, webController):
         return -1
 
 
-def doorTime(webController):
-    try:
-        doorTimer = pot2(webController)
-        if (doorTimer == -1):
-            return -1
-        timeInSeconds = (doorTimer / 3.3) * 10
-        successI(round(timeInSeconds, 1), webController)
-    except:
-        # webController.errorDetected('code:P02')
-        return -1
-
-
 def sanitizeTime(webController):
     try:
         sanitizeTimer = pot1(webController)
         if (sanitizeTimer == -1):
             return -1
         timeInSeconds = sanitizeTimer*5/3.3
-        pump(round(timeInSeconds, 1), webController)
-        doorTime(webController)
+        return round(timeInSeconds, 1)
     except:
         # webController.errorDetected('code:P01')
+        return -1
+
+
+def doorTime(webController):
+    try:
+        doorTimer = pot2(webController)
+        if (doorTimer == -1):
+            return -1
+        timeInSeconds = (doorTimer/3.3)*10
+        return round(timeInSeconds, 1)
+    except:
+        # webController.errorDetected('code:P02')
         return -1
