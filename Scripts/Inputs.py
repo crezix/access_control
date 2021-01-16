@@ -38,7 +38,7 @@ def disSensor(webController):
     else:
         try:
             dev = AnalogIn(adsV, ADS.P0)
-            return round(dev.voltage, 1)
+            return dev.value
         except:
             webController.errorDetected('code:S01')
             return - 1
@@ -64,7 +64,7 @@ def pot2(webController):
     else:
         try:
             dev = AnalogIn(adsV, ADS.P2)
-            return dev.value
+            return round(dev.voltage, 1)
         except:
             webController.errorDetected('code:P01')
             return - 1

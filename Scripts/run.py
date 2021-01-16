@@ -18,6 +18,8 @@ while True:
         break
     else:
         webController.loadIdlePage()
+    sanitizingDuration = sanitizeTime(webController)
+    doorDuration = doorTime(webController)
     temperatureL(2)
     temperature, tempStatus = measureTemp(36, webController)
     temperatureL(3)
@@ -42,8 +44,6 @@ while True:
                 sleep(5)
                 continue
             elif (handDetected):
-                sanitizingDuration = sanitizeTime(webController)
-                doorDuration = doorTime(webController)
                 pump(sanitizingDuration, webController)
                 successI(doorDuration, webController)
             continue
