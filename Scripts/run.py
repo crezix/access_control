@@ -8,7 +8,6 @@ from time import sleep
 import faulthandler
 import threading
 
-errorCount = 0
 
 webController = WebController.WebController()
 webController.loadIdlePage()
@@ -18,6 +17,7 @@ faulthandler.enable()
 
 
 def main():
+    errorCount = 0
     while True:
         if (errorCount > 2):
             break
@@ -48,8 +48,8 @@ def main():
                     webController.loadIdlePage()
                     continue
                 elif (handDetected):
-                    sanitizingDuration = 3  # sanitizeTime(webController)
-                    doorDuration = 4  # doorTime(webController)
+                    sanitizingDuration = sanitizeTime(webController)
+                    doorDuration = doorTime(webController)
                     if (sanitizingDuration == -1):
                         sanitizingDuration = 2.5
                     if (doorDuration == -1):
