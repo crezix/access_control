@@ -7,13 +7,6 @@ import WebController
 from time import sleep
 import faulthandler
 
-sanitizingDuration = sanitizeTime(webController)
-doorDuration = doorTime(webController)
-if (sanitizingDuration == -1):
-    sanitizingDuration = 2.5
-if (doorDuration == -1):
-    doorDuration = 5
-
 errorCount = 0
 
 webController = WebController.WebController()
@@ -21,6 +14,13 @@ webController.loadIdlePage()
 net, model = loadModels()
 
 faulthandler.enable()
+
+sanitizingDuration = sanitizeTime(webController)
+doorDuration = doorTime(webController)
+if (sanitizingDuration == -1):
+    sanitizingDuration = 2.5
+if (doorDuration == -1):
+    doorDuration = 5
 
 while True:
     if (errorCount > 2):
