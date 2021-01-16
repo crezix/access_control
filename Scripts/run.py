@@ -37,17 +37,17 @@ while True:
         elif(maskStatus):
             # sanitizingDuration = 5
             # sleepingDuration = 5
-            # sanitizeL(True)
+            sanitizeL(True)
             handDetected = detectHand(5, webController)
-            # sanitizeL(False)
+            sanitizeL(False)
             if (handDetected == -1):
                 errorCount += 1
                 sleep(5)
                 webController.loadIdlePage()
                 continue
             elif (handDetected):
-                sanitizingDuration = 3  # sanitizeTime(webController)
-                doorDuration = 4  # doorTime(webController)
+                sanitizingDuration = sanitizeTime(webController)
+                doorDuration = doorTime(webController)
                 if (sanitizingDuration == -1):
                     sanitizingDuration = 2.5
                 if (doorDuration == -1):
