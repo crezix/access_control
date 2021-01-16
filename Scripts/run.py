@@ -43,9 +43,9 @@ while True:
             elif(maskStatus):
                 # sanitizingDuration = 5
                 # sleepingDuration = 5
-                sanitizeL(True)
+                # sanitizeL(True)
                 handDetected = detectHand(5, webController)
-                sanitizeL(False)
+                # sanitizeL(False)
                 if (handDetected == -1):
                     errorCount += 1
                     sleep(5)
