@@ -6,7 +6,7 @@ from osCommands import emergShutdown, emergReboot, create
 import WebController
 from time import sleep
 import faulthandler
-import Thread
+import thread
 
 errorCount = 0
 
