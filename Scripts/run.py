@@ -16,53 +16,50 @@ net, model = loadModels()
 faulthandler.enable()
 
 while True:
-    try:
-        if (errorCount > 2):
-            break
-        else:
-            webController.loadIdlePage()
-        sanitizingDuration = sanitizeTime(webController)
-        doorDuration = doorTime(webController)
-        if (sanitizingDuration == -1):
-            sanitizingDuration = 2.5
-        if (doorDuration == -1):
-            doorDuration = 5
-        temperatureL(2)
-        temperature, tempStatus = measureTemp(36, webController)
-        temperatureL(3)
-        if (tempStatus == -1):
+    if (errorCount > 2):
+        break
+    else:
+        webController.loadIdlePage()
+    sanitizingDuration = sanitizeTime(webController)
+    doorDuration = doorTime(webController)
+    if (sanitizingDuration == -1):
+        sanitizingDuration = 2.5
+    if (doorDuration == -1):
+        doorDuration = 5
+    temperatureL(2)
+    temperature, tempStatus = measureTemp(36, webController)
+    temperatureL(3)
+    if (tempStatus == -1):
+        errorCount += 1
+        sleep(5)
+        continue
+    elif (tempStatus):
+        maskStatus = detectMask(net, model, webController, temperature)
+        if (maskStatus == -1):
             errorCount += 1
             sleep(5)
             continue
-        elif (tempStatus):
-            maskStatus = detectMask(net, model, webController, temperature)
-            if (maskStatus == -1):
+        elif(maskStatus):
+            # sanitizingDuration = 5
+            # sleepingDuration = 5
+            # sanitizeL(True)
+            handDetected = detectHand(5, webController)
+            # sanitizeL(False)
+            if (handDetected == -1):
                 errorCount += 1
                 sleep(5)
                 continue
-            elif(maskStatus):
-                # sanitizingDuration = 5
-                # sleepingDuration = 5
-                # sanitizeL(True)
-                handDetected = detectHand(5, webController)
-                # sanitizeL(False)
-                if (handDetected == -1):
-                    errorCount += 1
-                    sleep(5)
-                    continue
-                elif (handDetected):
-                    pump(sanitizingDuration, webController)
-                    successI(doorDuration, webController)
-                continue
-            else:
-                rejectI(True)
-                sleep(2)
-                rejectI(False)
-                continue
+            elif (handDetected):
+                pump(sanitizingDuration, webController)
+                successI(doorDuration, webController)
+            continue
         else:
             rejectI(True)
             sleep(2)
             rejectI(False)
             continue
-    except:
+    else:
+        rejectI(True)
+        sleep(2)
+        rejectI(False)
         continue
