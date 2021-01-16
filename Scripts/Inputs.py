@@ -7,7 +7,7 @@ import busio
 import adafruit_ads1x15.ads1015 as ADS
 from adafruit_ads1x15.analog_in import AnalogIn
 from numpy import interp
-from Inputs import pump, successI
+from Outputs import pump, successI
 
 
 def i2c(webController):
