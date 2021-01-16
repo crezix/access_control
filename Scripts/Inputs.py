@@ -113,8 +113,8 @@ def sanitizeTime(webController):
     try:
         sanitizeTimer = pot1(webController)
         if (sanitizeTimer == -1):
-            return 5
-        timeInSeconds = interp(sanitizeTimer, [0, 26368], [0, 5])
+            return -1
+        timeInSeconds = interp(sanitizeTimer, [0, 26400], [0, 5])
         return round(timeInSeconds, 1)
     except:
         return -1
@@ -124,8 +124,8 @@ def doorTime(webController):
     try:
         doorTimer = pot2(webController)
         if (doorTimer == -1):
-            return 5
-        timeInSeconds = interp(doorTimer, [0, 26368], [0, 10])
+            return -1
+        timeInSeconds = interp(doorTimer, [0, 26400], [0, 10])
         return round(timeInSeconds, 1)
     except:
         return -1
