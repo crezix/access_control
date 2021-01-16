@@ -1,4 +1,4 @@
-from gpiozero import DigitalOutputDevice
+from gpiozero import DigitalOutputDevice, LED
 from time import sleep
 
 
@@ -6,8 +6,8 @@ from time import sleep
 rejectIndicator = DigitalOutputDevice(17, initial_value=True)
 successIndicator = DigitalOutputDevice(22, initial_value=True)
 captureLight = DigitalOutputDevice(27, initial_value=True)
-sanitizerLight = DigitalOutputDevice(25)
-temperatureLight = DigitalOutputDevice(23)
+sanitizerLight = LED(25)
+temperatureLight = LED(23)
 pumpRelay = DigitalOutputDevice(24, initial_value=True)
 
 
@@ -27,7 +27,7 @@ def captureL(state):
 
 def sanitizeL(state):
     if(state):
-        sanitizerLight.blink(on_time=0.5, off_time=0.5)
+        sanitizerLight.on()
     else:
         sanitizerLight.off()
 
