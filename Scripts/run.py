@@ -17,7 +17,7 @@ net, model = loadModels()
 faulthandler.enable()
 
 
-def main(targ):
+def main():
     while True:
         if (errorCount > 2):
             break
@@ -48,8 +48,8 @@ def main(targ):
                     webController.loadIdlePage()
                     continue
                 elif (handDetected):
-                    sanitizingDuration = sanitizeTime(webController)
-                    doorDuration = doorTime(webController)
+                    sanitizingDuration = 3  # sanitizeTime(webController)
+                    doorDuration = 4  # doorTime(webController)
                     if (sanitizingDuration == -1):
                         sanitizingDuration = 2.5
                     if (doorDuration == -1):
@@ -69,4 +69,4 @@ def main(targ):
             continue
 
 
-threading._start_new_thread(main, (0,))
+main()
