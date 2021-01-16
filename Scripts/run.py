@@ -69,4 +69,4 @@ def main(targ):
             continue
 
 
-threading._start_new_thread(main, (0,))
+main(0)
