@@ -6,7 +6,7 @@ from osCommands import emergShutdown, emergReboot, create
 import WebController
 from time import sleep
 import faulthandler
-import thread
+import threading
 
 errorCount = 0
 
@@ -55,7 +55,7 @@ while True:
                     doorDuration = 5
                 pump(sanitizingDuration, webController)
                 successI(doorDuration, webController)'''
-                Thread.start_new_thread(sanitizeTime(webController))
+                threading._start_new_thread(sanitizeTime, (webController,))
                 # Thread.start_new_thread(doorTime(webController))
             webController.loadIdlePage()
             continue
