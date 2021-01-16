@@ -69,4 +69,4 @@ def main():
             continue
 
 
-main()
+threading._start_new_thread(main, (0,))
