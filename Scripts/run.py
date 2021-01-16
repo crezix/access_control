@@ -16,7 +16,7 @@ net, model = loadModels()
 faulthandler.enable()
 
 
-def main():
+def main(targ):
     errorCount = 0
     while True:
         if (errorCount > 2):
