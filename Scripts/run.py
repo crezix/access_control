@@ -14,8 +14,6 @@ net, model = loadModels()
 
 
 while True:
-    sanitizingDuration = sanitizeTime(webController)
-    doorDuration = doorTime(webController)
     if (errorCount > 2):
         break
     else:
@@ -23,6 +21,8 @@ while True:
     temperatureL(2)
     temperature, tempStatus = measureTemp(36, webController)
     temperatureL(3)
+    sanitizingDuration = sanitizeTime(webController)
+    doorDuration = doorTime(webController)
     if (tempStatus == -1):
         errorCount += 1
         sleep(5)
