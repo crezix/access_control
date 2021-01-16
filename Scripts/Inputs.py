@@ -38,7 +38,7 @@ def disSensor(webController):
     else:
         try:
             dev = AnalogIn(adsV, ADS.P0)
-            return dev.value
+            return round(dev.voltage, 1)
         except:
             webController.errorDetected('code:S01')
             return - 1
@@ -51,7 +51,7 @@ def pot1(webController):
     else:
         try:
             dev = AnalogIn(adsV, ADS.P1)
-            return dev.value
+            return round(dev.voltage, 1)
         except:
             webController.errorDetected('code:P01')
             return - 1
@@ -114,7 +114,7 @@ def sanitizeTime(webController):
         sanitizeTimer = pot1(webController)
         if (sanitizeTimer == -1):
             return -1
-        timeInSeconds = interp(sanitizeTimer, [0, 26400], [0, 5])
+        timeInSeconds = interp(sanitizeTimer, [0, 3.3], [0, 5])
         return round(timeInSeconds, 1)
     except:
         return -1
@@ -125,7 +125,7 @@ def doorTime(webController):
         doorTimer = pot2(webController)
         if (doorTimer == -1):
             return -1
-        timeInSeconds = interp(doorTimer, [0, 26400], [0, 10])
+        timeInSeconds = interp(doorTimer, [0, 3.3], [0, 10])
         return round(timeInSeconds, 1)
     except:
         return -1
