@@ -42,16 +42,22 @@ def temperatureL(state):
 
 
 def pump(pumpingTime, webController):
-    webController.sanitizing()
-    pumpRelay.off()
-    sleep(pumpingTime)
-    pumpRelay.on()
-    webController.sanitized()
+    try:
+        webController.sanitizing()
+        pumpRelay.off()
+        sleep(pumpingTime)
+        pumpRelay.on()
+        webController.sanitized()
+    except:
+        webController.errorDetected('code:PM01')
 
 
 def successI(doorTime, webController):
-    # webController.sanitizing()
-    successIndicator.off()
-    sleep(doorTime)
-    successIndicator.on()
-    # webController.sanitized()
+    try:
+        # webController.sanitizing()
+        successIndicator.off()
+        sleep(doorTime)
+        successIndicator.on()
+        # webController.sanitized()
+    except:
+        webController.errorDetected('code:D01')

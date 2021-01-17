@@ -20,6 +20,8 @@ faulthandler.enable()
 while True:
     if (errorCount > 2):
         break
+    else:
+        webController.loadIdlePage()
     temperatureL(2)
     temperature, tempStatus = measureTemp(36, webController)
     temperatureL(3)
@@ -34,14 +36,12 @@ while True:
             sleep(5)
             continue
         elif(maskStatus):
-            '''sanitizingDuration = sanitizeTime(webController)
+            sanitizingDuration = sanitizeTime(webController)
             doorDuration = doorTime(webController)
             if (sanitizingDuration == -1):
                 sanitizingDuration = 2.5
             if (doorDuration == -1):
-                doorDuration = 5'''
-            sanitizingDuration = 2
-            doorDuration = 3
+                doorDuration = 5
             # sanitizeL(True)
             handDetected = detectHand(5, webController)
             # sanitizeL(False)
@@ -52,17 +52,17 @@ while True:
             elif (handDetected):
                 pump(sanitizingDuration, webController)
                 successI(doorDuration, webController)
-                webController.loadIdlePage()
+                # webController.loadIdlePage()
                 continue
         else:
             rejectI(True)
             sleep(2)
             rejectI(False)
-            webController.loadIdlePage()
+            # webController.loadIdlePage()
             continue
     else:
         rejectI(True)
         sleep(2)
         rejectI(False)
-        webController.loadIdlePage()
+        # webController.loadIdlePage()
         continue
