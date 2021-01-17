@@ -4,7 +4,7 @@ from smbus2 import SMBus
 from mlx90614 import MLX90614
 import board
 import busio
-from Adafruit_ADS1x15 import ADS1115 as ADS
+import adafruit_ads1x15.ads1015 as ADS
 from adafruit_ads1x15.analog_in import AnalogIn
 from numpy import interp
 
