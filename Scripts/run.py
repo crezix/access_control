@@ -31,14 +31,12 @@ while True:
     if (tempStatus == -1):
         errorCount += 1
         sleep(5)
-        webController.loadIdlePage()
         continue
     elif (tempStatus):
         maskStatus = detectMask(net, model, webController, temperature)
         if (maskStatus == -1):
             errorCount += 1
             sleep(5)
-            webController.loadIdlePage()
             continue
         elif(maskStatus):
             sanitizingDuration = 5
@@ -49,11 +47,11 @@ while True:
             if (handDetected == -1):
                 errorCount += 1
                 sleep(5)
-                webController.loadIdlePage()
                 continue
             elif (handDetected):
                 pump(sanitizingDuration, webController)
                 successI(doorDuration, webController)
+            webController.loadIdlePage()
             continue
         else:
             rejectI(True)
