@@ -8,6 +8,8 @@ import adafruit_ads1x15.ads1015 as ADS
 from adafruit_ads1x15.analog_in import AnalogIn
 from numpy import interp
 
+sanitizerPIR = DigitalInputDevice(8)
+
 
 def i2c(webController):
     try:
@@ -99,7 +101,6 @@ def measureTemp(limit, webController):
 
 def detectHand(timeout, webController):
     try:
-        sanitizerPIR = DigitalInputDevice(8)
         sanitizerPIR.wait_for_inactive(timeout=timeout)
         value = sanitizerPIR.value
         return not(value)
