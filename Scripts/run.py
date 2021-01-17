@@ -34,12 +34,14 @@ while True:
             sleep(5)
             continue
         elif(maskStatus):
-            sanitizingDuration = sanitizeTime(webController)
+            '''sanitizingDuration = sanitizeTime(webController)
             doorDuration = doorTime(webController)
             if (sanitizingDuration == -1):
                 sanitizingDuration = 2.5
             if (doorDuration == -1):
-                doorDuration = 5
+                doorDuration = 5'''
+            sanitizingDuration = 2
+            doorDuration = 3
             # sanitizeL(True)
             handDetected = detectHand(5, webController)
             # sanitizeL(False)
