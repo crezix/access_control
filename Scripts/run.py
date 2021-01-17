@@ -51,8 +51,8 @@ while True:
             elif (handDetected):
                 pump(sanitizingDuration, webController)
                 successI(doorDuration, webController)
-            webController.loadIdlePage()
-            continue
+                webController.loadIdlePage()
+                continue
         else:
             rejectI(True)
             sleep(2)
