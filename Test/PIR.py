@@ -1,6 +1,6 @@
 from gpiozero import DigitalInputDevice, DigitalOutputDevice
 from time import sleep
-sanitizer_pir = DigitalInputDevice(27)
+sanitizer_pir = DigitalInputDevice(8)
 pumpRelay = DigitalOutputDevice(24, initial_value=True)
 
 while True:
