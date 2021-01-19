@@ -6,7 +6,7 @@ from time import sleep
 rejectIndicator = DigitalOutputDevice(17, initial_value=True)
 successIndicator = DigitalOutputDevice(22, initial_value=True)
 captureLight = DigitalOutputDevice(27, initial_value=True)
-sanitizerLight = LED(25, initial_value=True)
+sanitizerLight = LED(25, initial_value=False)
 temperatureLight = LED(23, initial_value=True)
 pumpRelay = DigitalOutputDevice(24, initial_value=True)
 
