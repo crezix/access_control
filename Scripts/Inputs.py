@@ -83,7 +83,7 @@ def measureTemp(limit, webController):
             if (sharpIR == -1):
                 return (-1, -1)
                 break
-            elif (sharpIR > 18000):
+            elif (sharpIR > 8000 and sharpIR < 11000):
                 webController.measuringTemperature()
                 temperature = tempSensor.get_object_1()
                 # bus.stop()
@@ -101,9 +101,9 @@ def measureTemp(limit, webController):
 
 def detectHand(timeout, webController):
     try:
-        sanitizerPIR.wait_for_inactive(timeout=timeout)
+        sanitizerPIR.wait_for_active(timeout=timeout)
         value = sanitizerPIR.value
-        return not(value)
+        return value
 
     except:
         webController.errorDetected('code: P01')
